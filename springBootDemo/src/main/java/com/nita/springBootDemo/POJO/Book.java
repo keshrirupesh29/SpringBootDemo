@@ -1,12 +1,20 @@
 package com.nita.springBootDemo.POJO;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@Entity
 public class Book {
-	
+	@Id
+	@Column
 	private long id;
+	@Column
 	private String bookName;
+	@Column
 	private String description;
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nita.springBootDemo.POJO.Book;
 import com.nita.springBootDemo.POJO.Intro;
+import com.nita.springBootDemo.Repository.CustomInterface;
 
 @RestController
 public class Controller {
@@ -17,6 +18,7 @@ public class Controller {
 	Intro intro;
 	@Autowired
 	Book book;
+	@Autowired CustomInterface customInterface;
 	
 	@GetMapping("/greeting")
 	public Intro  Greeting(@RequestParam(value="name")String name)
@@ -31,8 +33,23 @@ public class Controller {
 		long Id=book.getId();
 		String name=book.getBookName();
 		String Description=book.getDescription();
+		customInterface.save(book);
 		
 		return "My Book Id is "+Id +" My book name is "+name+" and My book Description is "+Description;
+	}
+	
+	@PostMapping("/getBook")
+	public String AddBook(@RequestParam (value="id")long  id)
+	{ 
+		Book book=customInterface.getById(id);
+		
+		
+		
+		String name=book.getBookName();
+		String Description=book.getDescription();
+		
+		
+		return " My book name is "+name+" and My book Description is "+Description;
 	}
 
 }
