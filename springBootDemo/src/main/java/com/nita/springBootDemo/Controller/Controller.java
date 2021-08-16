@@ -1,6 +1,7 @@
 package com.nita.springBootDemo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +39,18 @@ public class Controller {
 		return "My Book Id is "+Id +" My book name is "+name+" and My book Description is "+Description;
 	}
 	
+	@DeleteMapping("/deleteBook")
+	public String DeleteBook(@RequestParam (value="id")long  id)
+	{ 
+		Book book=customInterface.getById(id);
+		customInterface.delete(book)	;	
+		
+		return "The Book with ID " + id +" delete successfully";
+	}
+	
+	
 	@PostMapping("/getBook")
+	
 	public String AddBook(@RequestParam (value="id")long  id)
 	{ 
 		Book book=customInterface.getById(id);
@@ -49,7 +61,8 @@ public class Controller {
 		String Description=book.getDescription();
 		
 		
-		return " My book name is "+name+" and My book Description is "+Description;
+		return "My Book Id is " +id + " My book name is "+name+" and My book Description is "+Description;
 	}
+	
 
 }
